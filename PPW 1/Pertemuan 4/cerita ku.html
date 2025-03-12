@@ -1,0 +1,322 @@
+\documentclass[a4paper,11pt]{report}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+
+\geometry{
+    left=3cm,
+    right=2.5cm,
+    top=3cm,
+    bottom=3cm
+}
+% Konfigurasi warna
+\definecolor{codebg}{RGB}{240, 240, 240} % Warna latar belakang kode
+\definecolor{codeborder}{RGB}{200, 200, 200} % Warna border
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Konfigurasi tampilan kode
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{codebg}, % Latar belakang
+    basicstyle=\ttfamily\small, % Font monospace
+    frame=single, % Bingkai
+    rulecolor=\color{codeborder}, % Warna border
+    breaklines=true, % Otomatis wrap teks panjang
+    tabsize=2
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codegreen},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=single
+}
+\lstset{style=mystyle}
+% Konfigurasi tcolorbox untuk kode
+\newtcolorbox{codebox}{
+    colback=codebg, % Warna latar belakang
+    colframe=codeborder, % Warna border
+    arc=2mm, % Sudut lengkung
+    boxrule=0.5pt % Ketebalan garis border
+}
+\title{Laporan Praktikum \\ Praktikum Pemrograman web\\
+Pertemuan 4\\
+Form dan Graphic}
+\author{Nama Mahasiswa: Ahmad Fahim (24/535644/SV/24279)}
+\date{\today}
+
+\begin{document}
+
+% Halaman judul
+\begin{titlingpage}
+\begin{center}
+\vspace{4cm}
+\begin{huge} 
+\textbf{\thetitle} \\
+\end{huge}
+\vspace{2cm}
+\includegraphics[height=8cm]{lambang ugm.png}\\
+\begin{Large}
+\vspace{4cm}
+\theauthor\\
+Kelas A1 \\
+\end{Large}
+\begin{large}
+Dosen Pengampu: Dinar Nugroho Pratomo, S.Kom., M.IM., M.Cs.\\
+\end{large}
+\vspace{2cm}
+\thedate
+\end{center}
+\end{titlingpage}
+
+% Daftar Isi
+\tableofcontents
+\newpage
+
+\chapter{Tujuan Praktikum}
+\begin{enumerate}
+    \item Memahami dan mengimplementasikan elemen-elemen dasar dalam HTML Forms, seperti \texttt{<input>}, \texttt{<select>}, \texttt{<textarea>}, dan \texttt{<button>} untuk menerima input dari pengguna.
+    \item Mempelajari atribut-atribut penting dalam HTML Forms, seperti \texttt{readonly}, \texttt{disabled}, \texttt{required}, serta perbedaan penggunaan metode \texttt{GET} dan \texttt{POST} dalam pengiriman data.
+    \item Menggunakan elemen \texttt{<svg>} untuk menggambar berbagai bentuk grafik vektor, seperti garis, lingkaran, dan kotak pada halaman web.
+    \item Mempelajari penggunaan elemen \texttt{<canvas>} untuk menggambar grafik berbasis piksel dengan bantuan JavaScript guna meningkatkan interaktivitas dan visualisasi data.
+\end{enumerate}
+
+\chapter{Dasar Teori}
+
+\section{HTML dan Struktur Dasarnya}
+HTML (HyperText Markup Language) adalah bahasa standar yang digunakan untuk membuat halaman web. HTML berfungsi sebagai kerangka dasar dalam sebuah situs web, yang menentukan bagaimana elemen-elemen seperti teks, gambar, tautan, dan multimedia ditampilkan di peramban. HTML bekerja dengan menggunakan elemen-elemen yang ditandai dengan tag seperti \texttt{<html>}, \texttt{<head>}, dan \texttt{<body>}.  
+
+HTML terdiri dari berbagai elemen yang memiliki peran tertentu dalam penyusunan halaman web. Elemen-elemen ini dikelompokkan menjadi elemen struktur (seperti \texttt{<header>}, \texttt{<section>}, dan \texttt{<footer>}), elemen teks (seperti \texttt{<h1>} hingga \texttt{<h6>} untuk judul, serta \texttt{<p>} untuk paragraf), serta elemen interaktif (seperti \texttt{<button>} dan \texttt{<a>}).  
+
+\section{Formulir dalam HTML (HTML Forms)}
+Formulir dalam HTML adalah elemen yang memungkinkan pengguna untuk mengirimkan data ke server. Formulir sering digunakan dalam berbagai aplikasi web, seperti pendaftaran akun, pencarian, hingga proses pemesanan produk. Elemen \texttt{<form>} berperan sebagai wadah yang menampung berbagai jenis input.  
+
+Contoh formulir dasar dalam HTML adalah sebagai berikut:  
+
+\begin{lstlisting}[language=html, caption=Formulir HTML Sederhana]
+<form action="/submit_data" method="post">
+  <label for="nama">Nama:</label><br>
+  <input type="text" id="nama" name="nama"><br>
+  <label for="email">Email:</label><br>
+  <input type="email" id="email" name="email"><br>
+  <input type="submit" value="Kirim">
+</form>
+\end{lstlisting}
+
+Setiap formulir memiliki atribut utama, yaitu \texttt{action} dan \texttt{method}. Atribut \texttt{action} menentukan URL tujuan di mana data formulir akan dikirim, sedangkan \texttt{method} menentukan metode pengiriman data, biasanya \texttt{GET} atau \texttt{POST}.  
+
+\section{Elemen-Elemen dalam Formulir HTML}
+Elemen-elemen yang umum digunakan dalam formulir HTML antara lain:  
+
+- \texttt{<input type="text">} → Input teks biasa  
+- \texttt{<input type="email">} → Input email dengan validasi  
+- \texttt{<input type="password">} → Input teks dengan karakter tersembunyi  
+- \texttt{<input type="radio">} → Tombol radio untuk pilihan tunggal  
+- \texttt{<input type="checkbox">} → Kotak centang untuk pilihan ganda  
+- \texttt{<input type="submit">} → Tombol untuk mengirimkan formulir  
+
+Contoh dropdown dengan elemen \texttt{<select>}:  
+
+\begin{lstlisting}[language=html, caption=Dropdown pada Formulir HTML]
+<label for="gender">Jenis Kelamin:</label>
+<select id="gender" name="gender">
+  <option value="male">Laki-laki</option>
+  <option value="female">Perempuan</option>
+</select>
+\end{lstlisting}
+
+\section{Perbedaan antara Atribut \texttt{readonly} dan \texttt{disabled}}
+Atribut \texttt{readonly} dan \texttt{disabled} digunakan dalam formulir HTML untuk mengontrol input pengguna.  
+
+- **\texttt{readonly}**: Pengguna dapat melihat tetapi tidak bisa mengedit nilai input. Nilainya tetap dikirim ke server.  
+- **\texttt{disabled}**: Input sepenuhnya dinonaktifkan dan tidak dikirim ke server.  
+
+Contoh penggunaan:  
+
+\begin{lstlisting}[language=html, caption=Perbedaan Readonly dan Disabled]
+<!-- Readonly Input -->
+<input type="text" name="nama" value="Budi" readonly>
+
+<!-- Disabled Input -->
+<input type="text" name="nama" value="Budi" disabled>
+\end{lstlisting}
+
+\section{Grafik dalam HTML (HTML Graphics)}
+HTML mendukung elemen grafis seperti **SVG** dan **Canvas**.  
+
+\subsection{SVG (Scalable Vector Graphics)}
+SVG digunakan untuk menggambar bentuk berbasis vektor yang dapat diskalakan tanpa kehilangan kualitas.  
+
+\begin{lstlisting}[language=html, caption=Membuat Lingkaran dengan SVG]
+<svg width="200" height="200">
+  <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+</svg>
+\end{lstlisting}
+
+\subsection{Canvas}
+Canvas digunakan untuk menggambar grafik berbasis raster dengan JavaScript.  
+
+\begin{lstlisting}[language=html, caption=Elemen Canvas dalam HTML]
+<canvas id="myCanvas" width="200" height="100"></canvas>
+\end{lstlisting}
+
+\chapter{Hasil dan Pembahasan}
+
+\section{Latihan 1}
+
+\subsection{Struktur Dasar dan Formulir}
+Struktur utama dari kode ini terdiri dari elemen-elemen dasar HTML seperti \texttt{<html>}, \texttt{<head>}, dan \texttt{<body>}. Di dalamnya terdapat elemen \texttt{<fieldset>} yang digunakan untuk mengelompokkan bagian form, serta elemen \texttt{<legend>} yang berfungsi sebagai judul grup. Selain itu, elemen \texttt{<form>} mengelola input dari pengguna, termasuk pemilihan mobil, asal pengguna, dan rating. Berikut adalah ilustrasi dari struktur dasar dan formulir ini:
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{struktur_form1.png}
+\end{center}
+
+\subsection{Pilihan Mobil dan Input Asal}
+Bagian ini menyediakan dropdown untuk memilih mobil menggunakan elemen \texttt{<select>} dan \texttt{<optgroup>} untuk mengelompokkan mobil berdasarkan kategori. Selain itu, terdapat input untuk asal pengguna menggunakan elemen \texttt{<input list>} dengan bantuan \texttt{<datalist>} agar pengguna dapat memilih dari daftar yang telah disediakan. Berikut adalah tampilan bagian ini:
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{pilihan_mobil_asal.png}
+\end{center}
+
+\subsection{Rating dan Tombol Submit}
+Bagian terakhir dari form ini berisi input slider untuk memberikan rating dari 0 hingga 100. Nilai rating akan ditampilkan secara real-time menggunakan elemen \texttt{<output>}. Setelah pengguna selesai mengisi form, terdapat tombol \texttt{Submit} untuk mengirim data. Berikut adalah ilustrasi tampilan bagian rating dan tombol submit:
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{rating_submit.png}
+\end{center}
+
+Untuk hasil tampilan dari kode diatas dapat dilihat pada gambar berikut :
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{Hasil1.png}
+\end{center}
+\section{Latihan 2}
+
+\subsection{Struktur Form}
+Struktur dasar form terdiri dari tag \texttt{<form>} yang mengelompokkan berbagai input yang diperlukan. Elemen ini mencakup input teks untuk nama dan email, pilihan radio untuk jenis kelamin, dan drop-down untuk memilih domisili. Berikut ini adalah ilustrasi dari struktur form secara keseluruhan:
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{struktur_form.png}
+\end{center}
+
+\subsection{Bagian Informasi Pribadi}
+Bagian ini terdiri dari beberapa elemen penting, seperti:
+\begin{itemize}
+    \item Input teks untuk nama depan dan belakang.
+    \item Input email untuk alamat email.
+    \item Input password untuk mengisi kata sandi.
+    \item Radio button untuk memilih jenis kelamin.
+    \item Input tanggal untuk mengisi tanggal lahir.
+    \item Drop-down list dengan fitur \texttt{datalist} untuk memilih domisili.
+\end{itemize}
+Gambar di bawah ini menunjukkan tampilan bagian informasi pribadi pada form:
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{informasi_pribadi.png}
+\end{center}
+
+\subsection{Bagian Informasi Tambahan}
+Bagian ini mencakup input untuk memilih hobi menggunakan checkbox, textarea untuk mengisi deskripsi pribadi, serta input slider untuk memberikan rating kepuasan. Checkbox memungkinkan pengguna untuk memilih lebih dari satu hobi, sedangkan slider memberikan nilai numerik dari 0 hingga 100.
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{informasi_tambahan.png}
+\end{center}
+
+\subsection{Tombol Submit dan Reset}
+Form ini ditutup dengan dua tombol utama, yaitu:
+\begin{itemize}
+    \item \textbf{Submit}: Mengirimkan data yang telah diisi ke server dengan metode POST.
+    \item \textbf{Reset}: Menghapus semua isian dalam form sehingga pengguna bisa mengulang pengisian dari awal.
+\end{itemize}
+Ilustrasi di bawah ini menunjukkan tampilan tombol submit dan reset yang digunakan:
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{tombol_submit_reset.png}
+\end{center}
+
+Pembuatan form pendaftaran ini memberikan wawasan tentang berbagai elemen form dalam HTML dan bagaimana menggunakannya untuk membuat form yang interaktif dan mudah digunakan. Dengan tambahan elemen visual, form ini menjadi lebih menarik dan informatif bagi pengguna.
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{Hasil.png}
+\end{center}
+
+Inilah tampilan yang diberikan melalui rangkaian langkah yang telah dibuat.
+
+\section{Latihan 3}
+
+\subsection{Perbedaan antara Atribut \texttt{disabled} dan \texttt{readonly}}
+
+Dalam HTML, atribut \texttt{readonly} dan \texttt{disabled} digunakan untuk membatasi interaksi pengguna dengan elemen form, namun keduanya memiliki perbedaan mendasar.
+
+\begin{itemize}
+    \item \textbf{\texttt{readonly}} hanya dapat digunakan pada elemen \texttt{<input>} dan \texttt{<textarea>}. Pengguna tidak bisa mengedit isi input, tetapi masih bisa memilih dan menyalin teks. Selain itu, data dalam input tetap dikirim saat form disubmit.
+    \item \textbf{\texttt{disabled}} bisa diterapkan pada berbagai elemen form seperti \texttt{<input>}, \texttt{<textarea>}, \texttt{<select>}, dan \texttt{<button>}. Elemen yang memiliki atribut ini menjadi benar-benar tidak aktif, sehingga pengguna tidak bisa mengedit maupun menyalin teks. Data dari input ini juga tidak akan dikirim saat form disubmit.
+\end{itemize}
+
+Berikut adalah ilustrasi perbedaan antara atribut \texttt{readonly} dan \texttt{disabled} dalam form HTML.
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{readonly_input.png}
+\end{center}
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{disabled_input.png}
+\end{center}
+
+\subsection{Analisis Kode Form}
+Readonly
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{readonly.png}
+\end{center}
+Disabled
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{disabled.png}
+\end{center}
+
+
+Pada gambar pertama, input dengan atribut \texttt{readonly} tetap bisa dipilih dan teksnya bisa disalin oleh pengguna, namun tidak dapat diedit. Saat pengguna menekan tombol submit, data dalam input akan dikirim ke server.
+
+Pada gambar kedua, input dengan atribut \texttt{disabled} sepenuhnya tidak bisa berinteraksi dengan pengguna. Teks dalam input tidak bisa dipilih maupun disalin, dan nilai input tidak akan dikirim ke server saat form dikirimkan.
+
+Kesimpulannya jika ingin agar input tidak bisa diedit tetapi tetap terkirim dalam form, gunakan \texttt{readonly}. Jika ingin menonaktifkan input sepenuhnya agar tidak bisa diubah maupun dikirimkan, gunakan \texttt{disabled}.
+
+\chapter{Kesimpulan}
+
+Berdasarkan praktikum yang telah dilakukan, dapat disimpulkan bahwa HTML Forms merupakan elemen penting dalam pengembangan web yang memungkinkan interaksi pengguna dengan sistem. Elemen-elemen seperti \texttt{<input>}, \texttt{<select>}, \texttt{<textarea>}, dan \texttt{<button>} memiliki peran masing-masing dalam menerima berbagai jenis data. Selain itu, atribut-atribut seperti \texttt{readonly}, \texttt{disabled}, \texttt{required}, serta metode pengiriman data \texttt{GET} dan \texttt{POST} sangat memengaruhi bagaimana data diproses dalam sebuah aplikasi web.
+
+Selain itu, HTML Graphics memungkinkan pembuatan elemen visual dalam halaman web menggunakan elemen \texttt{<svg>} dan \texttt{<canvas>}. Elemen \texttt{<svg>} digunakan untuk menggambar grafik berbasis vektor yang tetap tajam pada berbagai ukuran, sedangkan \texttt{<canvas>} memungkinkan pembuatan grafik berbasis piksel dengan manipulasi dinamis menggunakan JavaScript. Dengan pemahaman terhadap kedua teknologi ini, pengembang dapat menciptakan elemen grafis interaktif yang menarik bagi pengguna.
+
+Secara keseluruhan, penguasaan HTML Forms dan Graphics sangat penting dalam pengembangan web modern. Formulir yang responsif dan intuitif meningkatkan pengalaman pengguna, sedangkan grafik yang dinamis dapat meningkatkan daya tarik visual situs web. Oleh karena itu, pemahaman terhadap konsep-konsep ini akan memberikan manfaat besar dalam pembuatan aplikasi web yang fungsional dan estetis.
+
+\chapter{Daftar Pustaka}
+
+\begin{itemize}
+    \item Modul Praktikum
+    \item Kompas. (2023). \textit{Pengertian HTML, Struktur, dan Fungsinya dalam Pengembangan Web}. Kompas. \url{https://www.kompas.com/skola/read/2023/10/18/040000369/pengertian-html-struktur-dan-fungsinya-dalam-pengembangan-web?page=all}
+    \item Binus University. (2018). \textit{Form pada HTML}. School of Computer Science Binus. \url{https://socs.binus.ac.id/2018/12/05/form-pada-html/}
+    \item Hostinger. (2018). \textit{Apa Itu HTML? Fungsi dan Cara Kerja HTML}. Hostinger. \url{https://www.hostinger.com/id/tutorial/apa-itu-html}
+    \item Duniailkom. (2021). \textit{Perbedaan Atribut Readonly dan Disabled}. Duniailkom. \url{https://www.duniailkom.com/perbedaan-atribut-readonly-dan-disabled-pada-html/}
+    \item Petani Kode. (2021). \textit{Tutorial SVG untuk Pemula}. Petani Kode. \url{https://www.petanikode.com/tutorial-svg/}
+    \item W3Schools. (2024). \textit{Memahami Elemen Canvas dalam HTML}. W3Schools. \url{https://www.w3schools.com/html/html5_canvas.asp}
+\end{itemize}
+
+
+\end{document}
