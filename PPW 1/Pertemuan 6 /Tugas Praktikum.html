@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praktikum CSS</title>
+    <style>
+        /* 1. Mengatur warna latar belakang */
+        body {
+            background-color: lightblue;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* 2. Mengatur warna teks */
+        header {
+            background-color: navy;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
+            margin: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 3. Mengatur ukuran font */
+        p {
+            font-size: 18px;
+        }
+
+        /* 4. Mengatur jenis font */
+        .font-sample {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* 5. Mengatur teks menjadi bold, italic, dan underline */
+        .bold {
+            font-weight: bold;
+        }
+        .italic {
+            font-style: italic;
+        }
+        .underline {
+            text-decoration: underline;
+        }
+
+        /* 6. Mengatur border */
+        .border-sample, .box, .center-text {
+            border: 2px solid black;
+            padding: 10px;
+            width: fit-content;
+            border-radius: 5px;
+        }
+
+        /* 7. Mengatur margin dan padding */
+        .box {
+            margin: 20px;
+            background-color: white;
+        }
+
+        /* 8. Mengatur alignment teks */
+        .center-text {
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        /* 9. Mengatur float untuk elemen */
+        .float-left {
+            float: left;
+            margin-right: 10px;
+        }
+
+        /* 10. Mengatur hover effect */
+        .hover-effect:hover {
+            background-color: yellow;
+        }
+
+        /* 11. Menggunakan pseudo-elemen */
+        .pseudo::after {
+            content: " - Ini contoh pseudo-element";
+            color: red;
+            font-size: 14px;
+        }
+        /* Styling untuk navigasi */
+        .navbar {
+            background-color: navy;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0 15px;
+            padding: 8px 12px;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            color: royalblue;
+            border-bottom: 2px solid royalblue;
+        }
+
+        /* 🔹 Wrapper untuk layout 2 kolom */
+        .container {
+            display: flex;
+            gap: 20px;
+            margin: 20px;
+        }
+
+        /* 🔹 Sidebar */
+        .sidebar {
+            width: 30%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 🔹 Konten utama */
+        .content {
+            flex-grow: 1;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: navy;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Praktikum CSS
+    </header>
+    <nav class="navbar">
+        <a href="#">Cloud Hosting</a>
+        <a href="#">Hosting</a>
+        <a href="#">Domain</a>
+    </nav>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Sidebar</h2>
+            <p>Ini adalah sidebar, berisi menu atau informasi tambahan.</p>
+        </aside>
+        <div class="content">
+            <p class="font-sample">Ini contoh penggunaan font-family.</p>
+            <p class="bold">Teks ini <span class="bold">bold</span>.</p>
+            <p class="italic">Teks ini <span class="italic">italic</span>.</p>
+            <p class="underline">Teks ini <span class="underline">underline</span>.</p>
+            <div class="border-sample">Ini contoh border.</div>
+            <div class="box">Ini contoh margin dan padding.</div>
+            <p class="center-text">Teks ini berada di tengah.</p>
+            <div style="display: flex; align-items: center;">
+                <img src="image.png" class="float-left" alt="Contoh float">
+                <p>Gambar di sebelah ini menggunakan float left.</p>
+            </div>
+            <p class="hover-effect">Arahkan kursor ke teks ini untuk efek hover.</p>
+            <p class="pseudo">Ini contoh penggunaan pseudo-element.</p>
+        </div>
+    </div>
+    
+    <footer>
+        &copy; 2025 Praktikum CSS. All rights reserved.
+    </footer>
+</body>
+</html>
