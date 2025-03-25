@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Preview Component</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: white;
+            display: flex;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-image img {
+            display: flex;
+            align-items: flex-end;
+            width: 200px;
+            height: 200px;
+        }
+
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .share-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .share-btn {
+            width: 40px;
+            height: 40px;
+            background-color: #4A5D6A;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+            margin-left: -75px;
+        }
+
+        .share-btn img {
+            width: 17px;
+            height: 17px;
+        }
+
+        .share-btn:hover {
+            background-color: #ffffff;
+        }
+
+        .share-box {
+            position: absolute;
+            background-color: #2d8789;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            z-index: 10;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-95%);
+        }
+
+        .share-box a img {
+            width: 20px;
+            height: 20px;
+            filter: brightness(0) invert(1);
+        }
+
+        .share-container.active .share-box {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-image">
+            <img src="D:\Anaconda\PPW 1\Flex box\article-preview-component-master\images\drawers.jpg" alt="Drawer">
+        </div>
+        <div class="card-content">
+            <h2>Shift the overall look and feel by adding these wonderful touches to furniture in your home</h2>
+            <p>Ever been in a room and felt like something was missing? Perhaps it felt slightly bare and uninviting. I've got some simple tips to help you make any room feel complete.</p>
+            <div class="card-footer">
+                <div class="author-info">
+                    <img src="D:\Anaconda\PPW 1\Flex box\article-preview-component-master\images\avatar-michelle.jpg" alt="Michelle Appleton">
+                    <div>
+                        <p><strong>Michelle Appleton<br>
+                        </strong>
+                            28 June 2020
+                    </p>
+                    </div>
+                </div>
+                <div class="share-container">
+                    <button class="share-btn">
+                        <img src="D:\Anaconda\PPW 1\Flex box\article-preview-component-master\images\icon-share.svg" alt="Share Icon">
+                    </button>
+                    <div class="share-box">
+                        <span>SHARE</span>
+                        <a href="#"><img src="D:\Anaconda\PPW 1\Flex box\article-preview-component-master\images\icon-facebook.svg" alt="Facebook"></a>
+                        <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter"></a>
+                        <a href="#"><img src="D:\Anaconda\PPW 1\Flex box\article-preview-component-master\images\icon-pinterest.svg" alt="Pinterest"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const shareContainer = document.querySelector(".share-container");
+            const shareBox = document.querySelector(".share-box");
+            const shareBtn = document.querySelector(".share-btn");
+
+            shareBtn.addEventListener("mouseenter", () => {
+                shareContainer.classList.add("active");
+            });
+
+            shareContainer.addEventListener("mouseleave", () => {
+                shareContainer.classList.remove("active");
+            });
+        });
+    </script>
+</body>
+</html>
